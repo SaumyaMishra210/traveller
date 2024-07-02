@@ -21,4 +21,5 @@ import travelapp
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include('travelapp.urls')),
+
 ]
