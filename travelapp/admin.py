@@ -2,12 +2,15 @@ from django.contrib import admin
 from travelapp.models import SignUpmodel , Bookingmodel
 
 # Register your models here.
+def get_all_field_names(model):
+    return [field.name for field in model._meta.fields]
+
 @admin.register(SignUpmodel)
 class signupAdmin(admin.ModelAdmin):
-    list_display = ('name','email')
+    list_display = get_all_field_names(SignUpmodel)
 @admin.register(Bookingmodel)
 class bookingAdmin(admin.ModelAdmin):
-    list_display = ('destination',)
+    list_display = get_all_field_names(Bookingmodel)
 
 
 # admin.site.register(SignUp,signupAdmin)

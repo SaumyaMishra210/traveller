@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<div class="card-body rounded-bottom bg-white p-5">
+	<form action="" method="post">
+		{% csrf_token %}
+		<label for="departDate">Depart Date:</label>
+		<input type="date" id="departDate" name="departDate" value="{{ bookings.departDate }}"><br><br>
+		
+		<label for="returnDate">Return Date:</label>
+		<input type="date" id="returnDate" name="returnDate" value="{{ bookings.returnDate }}"><br><br>
+		
+		<label for="destination">Destination:</label>
+		<select id="destination" name="destination">
+			{% for value, label   in bookings.BOOKING_DESTINATION %}
+				<option value="{{ value }}"
+				        {% if bookings.destination == value %}selected{% endif %}>{{ label }}</option>
+			{% endfor %}
+		</select><br><br>
+		
+		<label for="duration">Duration:</label>
+		<select id="duration" name="duration">
+			{% for value,  label  in bookings.BOOKING_DURATION %}
+				<option value="{{ value }}" {% if bookings.duration == value %}selected{% endif %}>{{ label }}</option>
+			{% endfor %}
+		</select><br><br>
+		
+		<button type="submit">Update Booking</button>
+	</form>
+</div>
+
+</body>
+</html>
