@@ -38,20 +38,20 @@ def index(request):
     return render(request, 'index.html', {'bookings': booking_instance,'user_profile':user_profile})
 
 
-def formView(request):
-    if request.method == 'POST':
-        print('inside post')
-        destination = request.POST.get('destination')
-        duration = request.POST.get('duration')
-        departDate = request.POST.get('departDate')
-        returnDate = request.POST.get('returnDate')
-
-        bookings = Bookingmodel(destination=destination, duration=duration, departDate=departDate,
-                                returnDate=returnDate)
-        bookings.save()
-        return redirect('success')
-    bookings = Bookingmodel()
-    return render(request, 'formpage.html', {'bookings': bookings})
+# def formView(request):
+#     if request.method == 'POST':
+#         print('inside post')
+#         destination = request.POST.get('destination')
+#         duration = request.POST.get('duration')
+#         departDate = request.POST.get('departDate')
+#         returnDate = request.POST.get('returnDate')
+#
+#         bookings = Bookingmodel(destination=destination, duration=duration, departDate=departDate,
+#                                 returnDate=returnDate)
+#         bookings.save()
+#         return redirect('success')
+#     bookings = Bookingmodel()
+#     return render(request, 'formpage.html', {'bookings': bookings})
 
 
 def success(request):
