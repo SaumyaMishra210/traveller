@@ -1,8 +1,24 @@
 from django.shortcuts import render, redirect
 from .models import Bookingmodel, SignUpmodel
+from django.contrib import messages
 
 
 # Create your views here.
+def about(request):
+    return render(request, "about.html")
+
+def blog(request):
+    return render(request,'blog.html')
+
+def contact(request):
+    return render(request, "contact.html")
+
+def destination(request):
+    return render(request,'destination.html')
+
+def guide(request):
+    return render(request,'guide.html')
+
 def index(request):
     if request.method == 'POST':
         if 'booking_form' in request.POST:
@@ -24,47 +40,48 @@ def index(request):
         elif 'user_form' in request.POST:
             name = request.POST.get('name')
             email = request.POST.get('email')
-            dest = request.POST.get('destination')
+            password = request.POST.get('password')
+            rpassword = request.POST.get('rpassword')
+            # dest = request.POST.get('destination')
 
-            user_profile = SignUpmodel(name=name, email=email,destination=dest)
+            if password != rpassword:
+                error_message = "Password not matched."
+                return render(request, 'index.html', {'error_message': error_message})
+
+            if SignUpmodel.objects.filter(email=email).exists():
+                error_message = "Email exists already."
+                return render(request, 'index.html', {'error_message': error_message})
+            messages.warning(request, 'This is a warning message.')
+
+            user_profile = SignUpmodel(name=name, email=email, password=password, rpassword=rpassword)
             user_profile.save()
 
         return redirect('success')
 
-    else:
-        print("else part")
     booking_instance = Bookingmodel()
     user_profile = SignUpmodel()
-    return render(request, 'index.html', {'bookings': booking_instance,'user_profile':user_profile})
+    return render(request, 'index.html', {'bookings': booking_instance, 'user_profile': user_profile})
 
+def login(request):
+    return render(request,'login.html')
 
-# def formView(request):
-#     if request.method == 'POST':
-#         print('inside post')
-#         destination = request.POST.get('destination')
-#         duration = request.POST.get('duration')
-#         departDate = request.POST.get('departDate')
-#         returnDate = request.POST.get('returnDate')
-#
-#         bookings = Bookingmodel(destination=destination, duration=duration, departDate=departDate,
-#                                 returnDate=returnDate)
-#         bookings.save()
-#         return redirect('success')
-#     bookings = Bookingmodel()
-#     return render(request, 'formpage.html', {'bookings': bookings})
+def register(request):
+    return render(request,'register.html')
 
+def package(request):
+    return render(request, 'package.html')
+
+def service(request):
+    return render(request, 'service.html')
+
+def single(request):
+    return render(request,'single.html')
 
 def success(request):
-    return render(request, 'success.html')
+    return render(request,'success.html')
 
-
-def contact(request):
-    return render(request, "contact.html")
-
-
-def about(request):
-    return render(request, "about.html")
-
+def testimonial(request):
+    return render(request,'testimonial.html')
 
 # def signUpFormData(request):
 #     if request.method == 'POST':

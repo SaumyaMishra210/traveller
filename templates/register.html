@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-	<!-- Contact Start -->
+	<!-- Registration Start -->
 	<div class="container-fluid py-5">
 		<div class="container py-5">
 			<div class="text-center mb-3 pb-3">
-				<h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Contact</h6>
-				<h1>Contact For Any Query</h1>
+				<h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Registration</h6>
+			
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
@@ -28,19 +28,20 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<input type="text" class="form-control p-4" id="subject" placeholder="Subject"
-								       required="required" data-validation-required-message="Please enter a subject"/>
+								<input name='password' type="password" class="form-control p-4" id="password"
+								       placeholder="password"
+								       required="required" data-validation-required-message="Please enter a password"/>
 								<p class="help-block text-danger"></p>
 							</div>
 							<div class="control-group">
-                                <textarea class="form-control py-3 px-4" rows="5" id="message" placeholder="Message"
-                                          required="required"
-                                          data-validation-required-message="Please enter your message"></textarea>
+								<input name='rpassword' type="password" class="form-control p-4" id="rpassword"
+								       placeholder="password (again)"
+								       required="required"
+								       data-validation-required-message="Please enter a re-password"/>
 								<p class="help-block text-danger"></p>
 							</div>
 							<div class="text-center">
-								<button class="btn btn-primary py-3 px-4" type="submit" id="sendMessageButton">Send
-									Message
+								<button class="btn btn-primary py-3 px-4" type="submit" id="sendMessageButton">Submit
 								</button>
 							</div>
 						</form>
@@ -49,6 +50,5 @@
 			</div>
 		</div>
 	</div>
-	<!-- Contact End -->
+	<!-- Registration End -->
 {% endblock main %}
-

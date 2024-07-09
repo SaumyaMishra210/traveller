@@ -1,5 +1,18 @@
 from django.db import models
+
+
 # Create your models here.
+class Login(models.Model):
+    username = models.CharField(max_length=200)
+    password = models.CharField(max_length=100)
+
+
+class Register(models.Model):
+    username = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+    password = models.CharField(max_length=100)
+    rpassword = models.CharField(max_length=100)
+
 class Bookingmodel(models.Model):
     departDate = models.DateField(max_length=10, default='00-00-0000')
     returnDate = models.DateField(max_length=10, default='00-00-0000')
@@ -17,20 +30,24 @@ class Bookingmodel(models.Model):
         ('Duration3', 'month 3'),
     ]
     duration = models.CharField(max_length=20, choices=BOOKING_DURATION, default='Duration')
+
     def __str__(self):
         return f"{self.duration} - {self.destination}"
 
 
 class SignUpmodel(models.Model):
-    name = models.CharField(max_length=70)
-    email = models.EmailField()
-    BOOKING_DESTINATION = [
-        ('Destination', 'Destination'),
-        ('Destination1', 'Goa'),
-        ('Destination2', 'Mumbai'),
-        ('Destination3', 'Laddakh'),
-    ]
-    destination = models.CharField(max_length=15, choices=BOOKING_DESTINATION, default='Destination')
+    name = models.CharField(max_length=70,unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=20, default='default')
+    rpassword = models.CharField(max_length=20, default='default')
+
+    # BOOKING_DESTINATION = [
+    #     ('Destination', 'Destination'),
+    #     ('Destination1', 'Goa'),
+    #     ('Destination2', 'Mumbai'),
+    #     ('Destination3', 'Laddakh'),
+    # ]
+    # destination = models.CharField(max_length=15, choices=BOOKING_DESTINATION, default='Destination')
 
     def __str__(self):
         return self.name
